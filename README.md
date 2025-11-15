@@ -18,10 +18,14 @@ and **prompt cosmetic** enhancements:
 
 - Date/time prefix
 - Inline Git repository status branch, ahead/behind, dirty state (via [posh-git](https://github.com/dahlbyk/posh-git))
-- Rich file & directory icons (via [Terminal-Icons](https://www.powershellgallery.com/packages/Terminal-Icons)):
+- Rich file & directory icons (via [Terminal-Icons](https://github.com/devblackops/Terminal-Icons)):
 
    Screenshot:
    ![PSToys](assets/pstoys.png)
+
+## Prerequisites
+
+- One of the fonts provided by [Nerd Fonts](https://www.nerdfonts.com/font-downloads) as they include the glyphs/icons that are referenced from `posh-git` and `Terminal-Icons`.
 
 ## Installation
 

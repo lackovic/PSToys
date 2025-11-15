@@ -5,7 +5,7 @@
     Author            = 'Marco Lackovic'
     CompanyName       = ''
     Copyright         = '(c) Marco Lackovic. All rights reserved.'
-    Description       = 'PSToys: a set of PowerShell utilities (drive stats, user profiles, explorer restart, enhanced findstr, PSReadLine history management, optional prompt).'
+    Description       = 'PSToys: a set of PowerShell utilities (drive stats, user profiles, explorer restart, enhanced findstr, permanent history management) and prompt enhancements leveraging posh-git and Terminal-Icons integration. Requires Nerd Font for icons.'
     PowerShellVersion = '5.1'
     CompatiblePSEditions = @('Desktop','Core')
     FunctionsToExport = @('Get-Drives','Get-Users','Restart-Explorer','findstr','Disable-History','Remove-KeywordFromHistory','Remove-DuplicateHistory')
