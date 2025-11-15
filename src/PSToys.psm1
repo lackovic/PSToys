@@ -18,10 +18,16 @@ Set-Item -Path Function:prompt -Value {
     }
 } -ErrorAction SilentlyContinue
 
-# Don't record space-prefixed or semicolon-prefixed short commands
-Set-PSReadLineOption -AddToHistoryHandler {
-    param([string]$line)
-    $line.Length -gt 3 -and $line[0] -ne ' ' -and $line[0] -ne ';'
+# Don't record any space-prefixed commands, any semicolon-prefixed commands, or commands shorter than 4 chars
+if (Get-Command Set-PSReadLineOption -ErrorAction SilentlyContinue) {
+    Set-PSReadLineOption -AddToHistoryHandler {
+        param([string]$line)
+        if (-not $line) { return $false }
+        # Exclude leading space (privacy), leading semicolon, and very short commands (<=3)
+        if ($line.StartsWith(' ') -or $line.StartsWith(';')) { return $false }
+        if ($line.Length -le 3) { return $false }
+        return $true
+    }
 }
 
 # Key binding: Ctrl+D exits the shell (ViExit)

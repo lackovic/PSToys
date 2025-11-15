@@ -11,7 +11,7 @@
 and prompt enhancements:
 - Duplicate history pruning
 - Ctrl+D exit shortcut
-- Command history filter (ignores short space-/semicolon-prefixed commands).
+- Command history filter (ignores short and space-/semicolon-prefixed commands).
 
 ## Installation
 
