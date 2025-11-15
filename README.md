@@ -44,11 +44,11 @@ and **prompt cosmetic** enhancements:
 
    PowerShell 7 note: use `-Scope AllUsers` (with elevated session) if you want it available to all accounts.
 
-1. Add the following line to your PowerShell profile (at `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1` for PowerShell 7) to auto-import on startup:
-
+1. Enable auto-import on startup by running:
+ 
    ```powershell
-   Import-Module PSToys
-   ```
+    @('','Import-Module PSToys') >> $PROFILE
+    ```
 
 ### Verify Installation
 
