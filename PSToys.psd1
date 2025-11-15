@@ -1,6 +1,6 @@
 @{
     RootModule        = 'src/PSToys.psm1'
-    ModuleVersion     = '1.1.0'
+    ModuleVersion     = '1.2.0'
     GUID              = '8e2cb56e-6e8c-4f64-9f39-3df0b7b2a4a2'
     Author            = 'Marco Lackovic'
     CompanyName       = ''
@@ -18,7 +18,7 @@
             LicenseUri = 'https://raw.githubusercontent.com/lackovic/PSToys/main/LICENSE'
             ProjectUri = 'https://github.com/lackovic/PSToys'
             IconUri    = ''
-            ReleaseNotes = 'Initial module extraction from profile script.'
+            ReleaseNotes = 'Added automatic posh-git and Terminal-Icons install/import with prompt/time prefix and directory listing icons.'
         }
     }
 }

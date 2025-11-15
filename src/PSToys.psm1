@@ -2,13 +2,16 @@
 PSToys Module Root (src/PSToys.psm1)
 Dot-sources public function scripts from Public directory.
 #>
-$moduleName = 'posh-git'
 
-# Ensure posh-git is installed if missing (best-effort; ignore failures).
-if (-not (Get-Module -ListAvailable -Name $moduleName)) {
+# ===== posh-git integration =====
+$poshGitName = 'posh-git'
+
+# Ensure posh-git is installed if missing
+if (-not (Get-Module -ListAvailable -Name $poshGitName)) {
     if (Get-Command -Name Install-Module -ErrorAction SilentlyContinue) {
         try {
-            Install-Module -Name $moduleName -Scope CurrentUser -Force -ErrorAction Stop
+            Install-Module -Name $poshGitName -Scope CurrentUser -Force -ErrorAction Stop
+            Write-Verbose "PSToys: Installed posh-git."
         }
         catch {
             Write-Verbose "PSToys: posh-git install failed: $($_.Exception.Message)"
@@ -16,15 +19,53 @@ if (-not (Get-Module -ListAvailable -Name $moduleName)) {
     }
 }
 
-# Import posh-git if now available.
-if (Get-Module -ListAvailable -Name $moduleName) {
-    try { Import-Module $moduleName -ErrorAction Stop } catch { Write-Verbose "PSToys: posh-git import failed: $($_.Exception.Message)" }
+# Import posh-git if available
+if (Get-Module -ListAvailable -Name $poshGitName) {
+    if (-not (Get-Module -Name $poshGitName)) {
+        try {
+            Import-Module $poshGitName -ErrorAction Stop
+            Write-Verbose "PSToys: posh-git module imported."
+        }
+        catch {
+            Write-Verbose "PSToys: posh-git import failed: $($_.Exception.Message)"
+        }
+    }
     if ($GitPromptSettings -and $GitPromptSettings.DefaultPromptPrefix) {
         $GitPromptSettings.DefaultPromptPrefix.Text = '$(Get-Date -f "HH:mm:ss") '
         $GitPromptSettings.DefaultPromptPrefix.ForegroundColor = [ConsoleColor]::Magenta
     }
 }
 
+# ===== Terminal-Icons integration =====
+$terminalIconsName = 'Terminal-Icons'
+
+# Ensure Terminal-Icons is installed if missing
+if (-not (Get-Module -ListAvailable -Name $terminalIconsName)) {
+    if (Get-Command -Name Install-Module -ErrorAction SilentlyContinue) {
+        try {
+            Install-Module -Name $terminalIconsName -Scope CurrentUser -Force -ErrorAction Stop
+            Write-Verbose "PSToys: Installed Terminal-Icons."
+        }
+        catch {
+            Write-Verbose "PSToys: Terminal-Icons install failed: $($_.Exception.Message)"
+        }
+    }
+}
+
+# Import Terminal-Icons if available
+if (Get-Module -ListAvailable -Name $terminalIconsName) {
+    if (-not (Get-Module -Name $terminalIconsName)) {
+        try {
+            Import-Module $terminalIconsName -ErrorAction Stop
+            Write-Verbose "PSToys: Terminal-Icons module imported."
+        }
+        catch {
+            Write-Verbose "PSToys: Terminal-Icons import failed: $($_.Exception.Message)"
+        }
+    }
+}
+
+# Dot-source all public function scripts
 $publicPath = Join-Path $PSScriptRoot 'Public'
 if (Test-Path $publicPath) {
     Get-ChildItem -Path $publicPath -Filter *.ps1 | ForEach-Object { . $_.FullName }

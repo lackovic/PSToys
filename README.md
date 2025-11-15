@@ -1,6 +1,6 @@
 # PowerShell Toys
 
-**PSToys** is a lightweight PowerShell module providing convenient utilities:
+**PSToys** is a lightweight PowerShell module providing convenient **utilities**:
 
 - Drive space & recycle bin size (`Get-Drives`)
 - Local user profile sizing (`Get-Users`)
@@ -8,42 +8,43 @@
 - Colored, case-insensitive text search wrapper (`findstr`)
 - Disabling or cleaning persistent command history (`Disable-History`, `Remove-KeywordFromHistory`, `Remove-DuplicateHistory`)
 
-prompt behavior enhancements:
+**prompt behavior** enhancements:
 
 - Duplicate history pruning
 - Ctrl+D exit shortcut
 - Command history filter (ignores short and space-/semicolon-prefixed commands)
 
-and prompt cosmetic enhancements through [posh-git](https://github.com/dahlbyk/posh-git) integration:
+and **prompt cosmetic** enhancements:
 
 - Date/time prefix
-- Inline Git repository status (branch, ahead/behind, dirty state)
+- Inline Git repository status branch, ahead/behind, dirty state (via [posh-git](https://github.com/dahlbyk/posh-git))
+- Rich file & directory icons (via [Terminal-Icons](https://www.powershellgallery.com/packages/Terminal-Icons)):
 
-Screenshot:
-
-![Prompt with date/time and branch](assets/date-time-branch.png)
+   Screenshot:
+   ![PSToys](assets/pstoys.png)
 
 ## Installation
 
-```powershell
-Install-Module PSToys -Scope CurrentUser
-```
+1. 
+   ```powershell
+   Install-Module PSToys -Scope CurrentUser
+   ```
 
-If prompted about an untrusted repository the first time:
+   If prompted about an untrusted repository the first time:
 
-```powershell
-Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-```
+   ```powershell
+   Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+   ```
 
-Or supply `-TrustRepository` on the `Install-Module` command.
+   Or supply `-TrustRepository` on the `Install-Module` command.
 
-PowerShell 7 note: use `-Scope AllUsers` (with elevated session) if you want it available to all accounts.
+   PowerShell 7 note: use `-Scope AllUsers` (with elevated session) if you want it available to all accounts.
 
-Add the following line to your PowerShell profile (at `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1` for PowerShell 7) to auto-import on startup:
+1. Add the following line to your PowerShell profile (at `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1` for PowerShell 7) to auto-import on startup:
 
-```powershell
-Import-Module PSToys
-```
+   ```powershell
+   Import-Module PSToys
+   ```
 
 ### Verify Installation
 
@@ -59,14 +60,6 @@ If a function does not appear, ensure `FunctionsToExport` in `PSToys.psd1` lists
 ```powershell
 Update-Module PSToys
 Import-Module PSToys -Force
-```
-
-## Adding to Your Profile
-
-Add the following line into your own profile at `$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`:
-
-```powershell
-Import-Module PSToys
 ```
 
 ## Usage Examples
