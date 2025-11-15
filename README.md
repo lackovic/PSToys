@@ -8,10 +8,20 @@
 - Colored, case-insensitive text search wrapper (`findstr`)
 - Disabling or cleaning persistent command history (`Disable-History`, `Remove-KeywordFromHistory`, `Remove-DuplicateHistory`)
 
-and prompt enhancements:
+prompt behavior enhancements:
+
 - Duplicate history pruning
 - Ctrl+D exit shortcut
-- Command history filter (ignores short and space-/semicolon-prefixed commands).
+- Command history filter (ignores short and space-/semicolon-prefixed commands)
+
+and prompt cosmetic enhancements through [posh-git](https://github.com/dahlbyk/posh-git) integration:
+
+- Date/time prefix
+- Inline Git repository status (branch, ahead/behind, dirty state)
+
+Screenshot:
+
+![Prompt with date/time and branch](assets/date-time-branch.png)
 
 ## Installation
 

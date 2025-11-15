@@ -1,6 +1,6 @@
 @{
     RootModule        = 'src/PSToys.psm1'
-    ModuleVersion     = '1.0.1'
+    ModuleVersion     = '1.1.0'
     GUID              = '8e2cb56e-6e8c-4f64-9f39-3df0b7b2a4a2'
     Author            = 'Marco Lackovic'
     CompanyName       = ''

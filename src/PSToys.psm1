@@ -2,6 +2,29 @@
 PSToys Module Root (src/PSToys.psm1)
 Dot-sources public function scripts from Public directory.
 #>
+$moduleName = 'posh-git'
+
+# Ensure posh-git is installed if missing (best-effort; ignore failures).
+if (-not (Get-Module -ListAvailable -Name $moduleName)) {
+    if (Get-Command -Name Install-Module -ErrorAction SilentlyContinue) {
+        try {
+            Install-Module -Name $moduleName -Scope CurrentUser -Force -ErrorAction Stop
+        }
+        catch {
+            Write-Verbose "PSToys: posh-git install failed: $($_.Exception.Message)"
+        }
+    }
+}
+
+# Import posh-git if now available.
+if (Get-Module -ListAvailable -Name $moduleName) {
+    try { Import-Module $moduleName -ErrorAction Stop } catch { Write-Verbose "PSToys: posh-git import failed: $($_.Exception.Message)" }
+    if ($GitPromptSettings -and $GitPromptSettings.DefaultPromptPrefix) {
+        $GitPromptSettings.DefaultPromptPrefix.Text = '$(Get-Date -f "HH:mm:ss") '
+        $GitPromptSettings.DefaultPromptPrefix.ForegroundColor = [ConsoleColor]::Magenta
+    }
+}
+
 $publicPath = Join-Path $PSScriptRoot 'Public'
 if (Test-Path $publicPath) {
     Get-ChildItem -Path $publicPath -Filter *.ps1 | ForEach-Object { . $_.FullName }
