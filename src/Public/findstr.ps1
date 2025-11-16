@@ -11,8 +11,19 @@ function findstr {
     #>
     if ($input) {
         $pattern = $args[0]
-        $input | & findstr.exe /I $args | ForEach-Object {
-            $_ -replace "(?i)($pattern)", "$([char]27)[91m`$1$([char]27)[0m"
+        $prevEncoding = [Console]::OutputEncoding
+        try {
+            [Console]::OutputEncoding = [System.Text.UTF8Encoding]::UTF8
+            # Use PowerShell's regex matching for piped input to preserve Unicode characters
+            $input | Where-Object { $_ -match $pattern } | ForEach-Object {
+                # Repair common UTF-8 mojibake for ellipsis produced when upstream command output
+                # was decoded with the wrong code page before reaching this function
+                $line = $_ -replace 'â€¦', '…' -replace 'ΓÇª', '…'
+                $line -replace "(?i)($pattern)", "$([char]27)[91m`$1$([char]27)[0m"
+            }
+        }
+        finally {
+            [Console]::OutputEncoding = $prevEncoding
         }
     }
     else {
